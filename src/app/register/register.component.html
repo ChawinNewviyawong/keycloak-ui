@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form (ngSubmit)="register()" class="text-center">
+                <h1>Register</h1>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-user">
+                                username
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Enter Username" [(ngModel)]="profile.username"
+                        name="username" required>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-lock">
+                                password
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="password" placeholder="Enter Password"
+                        [(ngModel)]="profile.password" name="password" required>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-lock">
+                                company
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Enter Company Name"
+                        [(ngModel)]="profile.companyName" name="company" required>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-lock">
+                                txid
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Enter Tx ID"
+                        [(ngModel)]="profile.txid" name="txid" required>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-lock">
+                                email
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="email" placeholder="Enter Email" [(ngModel)]="profile.email"
+                        name="email" required>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-user">
+                                birthday
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="date" placeholder="Enter Birthday" [(ngModel)]="profile.birthDay"
+                        name="birthday" required>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-user">
+                                address
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Enter Address" [(ngModel)]="profile.address"
+                        name="address" required>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-user">
+                                zipcode
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="number" placeholder="Enter Zipcode" [(ngModel)]="profile.zipcode"
+                        name="zipcode" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary form-control col-md-6" type="submit">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
