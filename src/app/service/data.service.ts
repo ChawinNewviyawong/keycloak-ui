@@ -5,8 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 const headers = new HttpHeaders({
-  "Content-Type": "application/json",
-  "Authorization": localStorage.getItem('accessToken'),
+  "Authorization": "Bearer " + localStorage.getItem('accessToken'),
 });
 
 @Injectable({
@@ -32,7 +31,7 @@ export class DataService {
     const httpOptions = {
       headers: headers,
     };
-    return this.httpClient.post<any>(url, httpOptions)
+    return this.httpClient.post<any>(url, "", httpOptions)
       .pipe(
         catchError(this.handleError)
       );
