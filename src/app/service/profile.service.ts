@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 
 const headers = new HttpHeaders({
+  "Content-Type": "application/json"
 });
 
 @Injectable({
@@ -16,7 +17,7 @@ export class ProfileService {
 
   register(body) {
     const url = environment.profileURL + '/register';
-    return this.http.post<any>(url, body, {headers: headers, observe: 'response'})
+    return this.http.post<any>(url, body, { headers: headers, observe: 'response' })
       .pipe(
         catchError(this.handleError)
       );
@@ -24,7 +25,7 @@ export class ProfileService {
 
   getProfile(token) {
     const url = environment.profileURL + '/getProfile';
-    return this.http.post<any>(url, token, {headers: headers, observe: 'response'})
+    return this.http.post<any>(url, token, { headers: headers, observe: 'response' })
       .pipe(
         catchError(this.handleError)
       );

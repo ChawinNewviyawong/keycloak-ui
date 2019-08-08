@@ -4,6 +4,7 @@ import { ProfileService } from '../service/profile.service';
 import { tokenName } from '@angular/compiler';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +26,7 @@ export class DashboardComponent implements OnInit {
   port = location.port;
 
   constructor(
+    private cookieService: CookieService,
     private dataService: DataService,
     private profileService: ProfileService,
     private authService: AuthService,
@@ -37,8 +39,10 @@ export class DashboardComponent implements OnInit {
 
   getProfile() {
     let token = {
-      accessToken: localStorage.getItem('accessToken'),
+      // accessToken: localStorage.getItem('accessToken'),
+      accessToken: this.cookieService.get('accessToken'),
     }
+    console.log("accessToken " + localStorage.getItem('accessToken'));
     this.profileService.getProfile(token).subscribe((response) => {
       console.log(response);
       this.profile = response.body;
@@ -51,13 +55,14 @@ export class DashboardComponent implements OnInit {
         this.profile.address = data.address;
         this.profile.zipcode = data.zipcode;
       }
-      this.getDataList();
+      this.getAllProductByOwner();
 
     }, error => {
       console.log(error);
       if (error.error.code == 401) {
         console.log(error.error.code);
-        let refreshToken = localStorage.getItem('refreshToken');
+        // let refreshToken = localStorage.getItem('refreshToken');
+        let refreshToken = this.cookieService.get('refreshToken');
         this.authService.refreshToken(refreshToken).subscribe(
           response => {
             console.log(response);
@@ -65,6 +70,8 @@ export class DashboardComponent implements OnInit {
             let refreshToken = response.body.refreshToken;
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
+            this.cookieService.set('accessToken', accessToken);
+            this.cookieService.set('refreshToken', refreshToken);
             this.getProfile();
           }
         );
@@ -72,8 +79,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getDataList() {
-    let accessToken = localStorage.getItem('accessToken');
+  getAllProductByOwner() {
+    let accessToken = this.cookieService.get('accessToken');
     this.dataService.getAllProductByOwner(accessToken).subscribe((response) => {
       console.log(response);
       this.mapField(response.body);

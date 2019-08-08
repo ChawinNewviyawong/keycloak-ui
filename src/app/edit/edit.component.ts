@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
+  product = {
+    id: "",
+    name: "",
+    price: "",
+    currency: "",
+    quantity: "",
+  }
+
   constructor() { }
 
   ngOnInit() {

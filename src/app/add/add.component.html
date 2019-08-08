@@ -1,13 +1,13 @@
-<div class="container" style="margin-top: 20px;">
+<!-- <div class="container" style="margin-top: 20px;">
     <div class="card">
         <div class="card-body">
             {{port}}
         </div>
     </div>
-</div>
-<div class="container">
+</div> -->
+<div class="container center">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mx-auto" >
             <form (ngSubmit)="addProduct()" class="text-center">
                 <h1>Add New Product</h1>
                 <div class="input-group mb-3">
@@ -19,7 +19,7 @@
                         </span>
                     </div>
                     <input class="form-control" type="text" placeholder="Enter Product identity"
-                        [(ngModel)]="product.identity" name="identity" required>
+                        [(ngModel)]="product_payload.identity" name="identity" required>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -29,7 +29,7 @@
                             </i>
                         </span>
                     </div>
-                    <input class="form-control" type="text" placeholder="Enter Product Name" [(ngModel)]="product.name"
+                    <input class="form-control" type="text" placeholder="Enter Product Name" [(ngModel)]="product_payload.name"
                         name="name" required>
                 </div>
                 <div class="input-group mb-3">
@@ -40,7 +40,7 @@
                             </i>
                         </span>
                     </div>
-                    <input class="form-control" type="number" placeholder="Enter Price" [(ngModel)]="product.price"
+                    <input class="form-control" type="number" placeholder="Enter Price" [(ngModel)]="product_payload.price"
                         name="price" required>
                 </div>
                 <div class="input-group mb-3">
@@ -51,7 +51,7 @@
                             </i>
                         </span>
                     </div>
-                    <input class="form-control" type="text" placeholder="Enter Currency" [(ngModel)]="product.currency"
+                    <input class="form-control" type="text" placeholder="Enter Currency" [(ngModel)]="product_payload.currency"
                         name="currency" required>
                 </div>
                 <div class="input-group mb-3">
@@ -63,7 +63,7 @@
                         </span>
                     </div>
                     <input class="form-control" type="number" placeholder="Enter Quantity"
-                        [(ngModel)]="product.quantity" name="quantity" required>
+                        [(ngModel)]="product_payload.quantity" name="quantity" required>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -76,7 +76,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
