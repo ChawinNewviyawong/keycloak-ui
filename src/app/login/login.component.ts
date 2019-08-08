@@ -24,12 +24,13 @@ export class LoginComponent implements OnInit {
 
   requestToken() {
     this.authService.requestToken(this.user).subscribe(response => {
-      let accessToken = response.accessToken;
-      let refreshToken = response.refreshToken;
-      console.log('accessToken: ' + accessToken);
-      console.log('refreshToken: ' + refreshToken);
+      console.log(response);
+      let accessToken = response.body.accessToken;
+      let refreshToken = response.body.refreshToken;
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
+      console.log('accessToken: ' + localStorage.getItem('accessToken'));
+      console.log('refreshToken: ' + localStorage.getItem('refreshToken'));
       this._router.navigateByUrl("/dashboard");
     });
   }

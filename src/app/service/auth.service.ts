@@ -20,9 +20,6 @@ export class AuthService {
   requestToken(user) {
     // const url = environment.authURL + '/auth/realms/master/protocol/openid-connect/token';
     const url = environment.profileURL + '/getToken';
-    const httpOptions = {
-      headers: headers,
-    };
     let body = {
       grant_type: 'password',
       username: user.username,
@@ -32,18 +29,22 @@ export class AuthService {
       realms: environment.realms,
     }
     
-    return this.http.post<any>(url, body, httpOptions)
+    return this.http.post<any>(url, body, {headers: headers, observe: 'response'})
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  login(body) {
-    const url = environment.dataURL + '/login';
-    const httpOptions = {
-      headers: headers,
-    };
-    return this.http.post<any>(url, body, httpOptions)
+  refreshToken(refreshToken) {
+    const url = environment.profileURL + '/getNewToken';
+    let body = {
+      grant_type: 'refresh_token',
+      client_id: environment.client_id,
+      client_secret: environment.client_secret,
+      refreshToken: refreshToken,
+    }
+    
+    return this.http.post<any>(url, body, {headers: headers, observe: 'response'})
       .pipe(
         catchError(this.handleError)
       );

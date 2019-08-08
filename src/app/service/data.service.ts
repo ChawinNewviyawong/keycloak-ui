@@ -4,10 +4,6 @@ import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-const headers = new HttpHeaders({
-  "Authorization": "Bearer " + localStorage.getItem('accessToken'),
-});
-
 @Injectable({
   providedIn: 'root'
 })
@@ -15,23 +11,12 @@ export class DataService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getProfile(token) {
-    const url = environment.profileURL + '/getProfile';
-    const httpOptions = {
-      headers: headers,
-    };
-    return this.httpClient.post<any>(url, token, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  getDataList() {
+  getDataList(accessToken) {
     const url = environment.dataURL + '/getAllProductByOwner';
-    const httpOptions = {
-      headers: headers,
-    };
-    return this.httpClient.post<any>(url, "", httpOptions)
+    const headers = new HttpHeaders({
+      "Authorization": "Bearer " + accessToken,
+    });
+    return this.httpClient.post<any>(url, {}, {headers: headers, observe: 'response'})
       .pipe(
         catchError(this.handleError)
       );

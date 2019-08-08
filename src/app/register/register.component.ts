@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.profileService.register(this.profile)
-      .subscribe((response: Response) => {
+      .subscribe((response) => {
         // if (response.status == 200) {
           console.log(response.body);
           // this._router.navigateByUrl("/dashboard");

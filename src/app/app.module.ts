@@ -11,13 +11,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileService } from './service/profile.service';
 import { AuthService } from './service/auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    EditComponent
   ],
   imports: [
     HttpClientModule,

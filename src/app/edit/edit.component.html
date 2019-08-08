@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form (ngSubmit)="register()" class="text-center">
+                <h1>Edit Product</h1>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-user">
+                                name
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Enter Product Name" [(ngModel)]="product.name"
+                        name="name" required>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-lock">
+                                price
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="number" placeholder="Enter Price"
+                        [(ngModel)]="product.price" name="price" required>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-lock">
+                                currency
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Enter Currency"
+                        [(ngModel)]="product.currency" name="currency" required>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-lock">
+                                quantity
+                            </i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="number" placeholder="Enter Quantity" [(ngModel)]="product.quantity"
+                        name="quantity" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary form-control col-md-6" type="submit">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

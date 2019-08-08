@@ -16,10 +16,15 @@ export class ProfileService {
 
   register(body) {
     const url = environment.profileURL + '/register';
-    const httpOptions = {
-      headers: headers,
-    };
-    return this.http.post<any>(url, body, httpOptions)
+    return this.http.post<any>(url, body, {headers: headers, observe: 'response'})
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getProfile(token) {
+    const url = environment.profileURL + '/getProfile';
+    return this.http.post<any>(url, token, {headers: headers, observe: 'response'})
       .pipe(
         catchError(this.handleError)
       );
@@ -38,6 +43,6 @@ export class ProfileService {
     }
     // return an observable with a user-facing error message
     return throwError(
-      'Something bad happened; please try again later.');
+      error);
   };
 }
