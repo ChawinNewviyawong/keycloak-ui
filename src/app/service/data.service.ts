@@ -3,13 +3,16 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private cookieService: CookieService) { }
 
   getDataList(accessToken) {
     const url = environment.dataURL + '/getAllProductByOwner';
@@ -17,6 +20,18 @@ export class DataService {
       "Authorization": "Bearer " + accessToken,
     });
     return this.httpClient.post<any>(url, {}, {headers: headers, observe: 'response'})
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  updateProduct(product) {
+    const url = environment.dataURL + '/updateProduct';
+    const headers = new HttpHeaders({
+      "Authorization": "Bearer " + this.cookieService.get('accessToken'),
+      "Content-Type": "application/json",
+    });
+    return this.httpClient.post<any>(url, product, {headers: headers, observe: 'response'})
       .pipe(
         catchError(this.handleError)
       );

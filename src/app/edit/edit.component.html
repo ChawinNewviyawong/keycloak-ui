@@ -23,7 +23,7 @@
                         </span>
                     </div>
                     <input class="form-control" type="number" placeholder="Enter Price"
-                        [(ngModel)]="product.price" name="price" required>
+                        [(ngModel)]="product.unit_price" name="price" required>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <button class="btn btn-primary form-control col-md-6" type="submit">Register</button>
+                        <button class="btn btn-primary form-control col-md-6" type="button" (click)="save()">Save</button>
                     </div>
                 </div>
             </form>

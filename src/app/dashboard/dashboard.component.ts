@@ -68,9 +68,8 @@ export class DashboardComponent implements OnInit {
             let accessToken = response.body.accessToken;
             let refreshToken = response.body.refreshToken;
             localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', refreshToken);
             this.cookieService.set('accessToken', accessToken);
-            this.cookieService.set('refreshToken', refreshToken);
+            // this.cookieService.set('refreshToken', refreshToken);
             this.getProfile();
           }
         );
@@ -90,6 +89,8 @@ export class DashboardComponent implements OnInit {
   }
 
   edit(item) {
+    console.log(item);
+    localStorage.setItem('product', JSON.stringify(item));
     this._router.navigateByUrl("/edit");
   }
 
@@ -102,9 +103,9 @@ export class DashboardComponent implements OnInit {
 
     for (let data of body) {
       let item: Type = {};
-      item.id = data.identity;
+      item.identity = data.identity;
       item.name = data.name;
-      item.price = data.unit_price;
+      item.unit_price = data.unit_price;
       item.currency = data.currency;
       item.quantity = data.quantity;
       this.data.push(item);
