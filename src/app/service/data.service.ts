@@ -14,12 +14,12 @@ export class DataService {
     private httpClient: HttpClient,
     private cookieService: CookieService) { }
 
-  getDataList(accessToken) {
+  getAllProductByOwner(accessToken) {
     const url = environment.dataURL + '/getAllProductByOwner';
     const headers = new HttpHeaders({
       "Authorization": "Bearer " + accessToken,
     });
-    return this.httpClient.post<any>(url, {}, {headers: headers, observe: 'response'})
+    return this.httpClient.post<any>(url, {}, { headers: headers, observe: 'response' })
       .pipe(
         catchError(this.handleError)
       );
@@ -31,7 +31,16 @@ export class DataService {
       "Authorization": "Bearer " + this.cookieService.get('accessToken'),
       "Content-Type": "application/json",
     });
-    return this.httpClient.post<any>(url, product, {headers: headers, observe: 'response'})
+    return this.httpClient.post<any>(url, product, { headers: headers, observe: 'response' })
+  }
+
+  addProduct(payload, accessToken) {
+    const url = environment.dataURL + '/addProduct';
+    const headers = new HttpHeaders({
+      "Authorization": "Bearer " + accessToken,
+      "Content-Type": "application/json"
+    });
+    return this.httpClient.post<any>(url, payload, {headers: headers, observe: 'response'})
       .pipe(
         catchError(this.handleError)
       );
@@ -49,7 +58,6 @@ export class DataService {
         `body was: ${JSON.stringify(error.error)}`);
     }
     // return an observable with a user-facing error message
-    return throwError(
-      'Something bad happened; please try again later.');
+    return throwError(error);
   };
 }

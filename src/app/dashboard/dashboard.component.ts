@@ -30,7 +30,8 @@ export class DashboardComponent implements OnInit {
     private dataService: DataService,
     private profileService: ProfileService,
     private authService: AuthService,
-    private _router: Router) { }
+    private _router: Router
+    ) { }
 
   ngOnInit() {
     this.getProfile();
@@ -54,7 +55,7 @@ export class DashboardComponent implements OnInit {
         this.profile.address = data.address;
         this.profile.zipcode = data.zipcode;
       }
-      this.getDataList();
+      this.getAllProductByOwner();
 
     }, error => {
       console.log(error);
@@ -77,9 +78,9 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getDataList() {
+  getAllProductByOwner() {
     let accessToken = this.cookieService.get('accessToken');
-    this.dataService.getDataList(accessToken).subscribe((response) => {
+    this.dataService.getAllProductByOwner(accessToken).subscribe((response) => {
       console.log(response);
       this.mapField(response.body);
     },

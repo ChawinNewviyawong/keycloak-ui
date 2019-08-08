@@ -28,10 +28,12 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    console.log(`[register] : ${JSON.stringify(this.profile) }`);
+
     this.profileService.register(this.profile)
       .subscribe((response) => {
         // if (response.status == 200) {
-          console.log(response.body);
+          console.log(`[result] : ${JSON.stringify(response.body) }`);
           // this._router.navigateByUrl("/dashboard");
         // }
         // else {
