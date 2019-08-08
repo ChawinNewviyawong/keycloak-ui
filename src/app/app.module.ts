@@ -12,6 +12,7 @@ import { ProfileService } from './service/profile.service';
 import { AuthService } from './service/auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditComponent } from './edit/edit.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { EditComponent } from './edit/edit.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [AuthService, ProfileService],
+  providers: [AuthService, ProfileService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

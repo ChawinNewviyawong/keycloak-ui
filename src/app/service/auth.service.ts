@@ -4,11 +4,11 @@ import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 
-const headers = new HttpHeaders({
-  // "Content-Type": "application/x-www-form-urlencoded",
-  "Content-Type": "application/json",
-  "Authorization": localStorage.getItem('accessToken'),
-});
+// const headers = new HttpHeaders({
+//   // "Content-Type": "application/x-www-form-urlencoded",
+//   "Content-Type": "application/json",
+//   "Authorization": localStorage.getItem('accessToken'),
+// });
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,11 @@ export class AuthService {
       client_secret: environment.client_secret,
       realms: environment.realms,
     }
-    
+    let headers = new HttpHeaders();
+    headers.append(
+      // "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type", "application/json");
+    headers.append("Authorization", localStorage.getItem('accessToken'));
     return this.http.post<any>(url, body, {headers: headers, observe: 'response'})
       .pipe(
         catchError(this.handleError)
@@ -37,6 +41,11 @@ export class AuthService {
 
   refreshToken(refreshToken) {
     const url = environment.profileURL + '/getNewToken';
+    let headers = new HttpHeaders();
+    headers.append(
+      // "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type", "application/json");
+    headers.append("Authorization", localStorage.getItem('accessToken'));
     let body = {
       grant_type: 'refresh_token',
       client_id: environment.client_id,
@@ -63,6 +72,6 @@ export class AuthService {
     }
     // return an observable with a user-facing error message
     return throwError(
-      'Something bad happened; please try again later.');
+      error);
   };
 }
