@@ -28,7 +28,8 @@ export class DashboardComponent implements OnInit {
     private dataService: DataService,
     private profileService: ProfileService,
     private authService: AuthService,
-    private _router: Router) { }
+    private _router: Router
+    ) { }
 
   ngOnInit() {
     this.getProfile();
@@ -73,7 +74,7 @@ export class DashboardComponent implements OnInit {
 
   getDataList() {
     let accessToken = localStorage.getItem('accessToken');
-    this.dataService.getDataList(accessToken).subscribe((response) => {
+    this.dataService.getAllProductByOwner(accessToken).subscribe((response) => {
       console.log(response);
       this.mapField(response.body);
     },

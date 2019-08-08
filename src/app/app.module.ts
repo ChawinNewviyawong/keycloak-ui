@@ -12,6 +12,7 @@ import { ProfileService } from './service/profile.service';
 import { AuthService } from './service/auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditComponent } from './edit/edit.component';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EditComponent } from './edit/edit.component';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    EditComponent
+    EditComponent,
+    AddComponent
   ],
   imports: [
     HttpClientModule,

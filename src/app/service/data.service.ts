@@ -11,10 +11,34 @@ export class DataService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getDataList(accessToken) {
+  getAllProductByOwner(accessToken) {
     const url = environment.dataURL + '/getAllProductByOwner';
     const headers = new HttpHeaders({
       "Authorization": "Bearer " + accessToken,
+    });
+    return this.httpClient.post<any>(url, {}, {headers: headers, observe: 'response'})
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  addProduct(payload, accessToken) {
+    const url = environment.dataURL + '/addProduct';
+    const headers = new HttpHeaders({
+      "Authorization": "Bearer " + accessToken,
+      "Content-Type": "application/json"
+    });
+    return this.httpClient.post<any>(url, {payload}, {headers: headers, observe: 'response'})
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  updateProduct(payload, accessToken) {
+    const url = environment.dataURL + '/updateProduct';
+    const headers = new HttpHeaders({
+      "Authorization": "Bearer " + accessToken,
+      "Content-Type": "application/json"
     });
     return this.httpClient.post<any>(url, {}, {headers: headers, observe: 'response'})
       .pipe(
