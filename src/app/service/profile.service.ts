@@ -5,11 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 
 const headers = new HttpHeaders({
-<<<<<<< HEAD
   "Content-Type": "application/json",
-=======
-  "Content-Type": "application/json"
->>>>>>> c8ad42d4ea9dd7eec118efe505677b8925e12faf
 });
 
 @Injectable({
