@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
     private profileService: ProfileService,
     private authService: AuthService,
     private _router: Router
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.getProfile();
@@ -93,6 +93,31 @@ export class DashboardComponent implements OnInit {
     console.log(item);
     localStorage.setItem('product', JSON.stringify(item));
     this._router.navigateByUrl("/edit");
+  }
+
+  delete(item) {
+    console.log(item);
+    this.dataService.deleteProduct(item).subscribe(response => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+      if (error.error.code == 401) {
+        console.log(error.error.code);
+        // let refreshToken = localStorage.getItem('refreshToken');
+        let refreshToken = this.cookieService.get('refreshToken');
+        this.authService.refreshToken(refreshToken).subscribe(
+          response => {
+            console.log(response);
+            let accessToken = response.body.accessToken;
+            let refreshToken = response.body.refreshToken;
+            localStorage.setItem('accessToken', accessToken);
+            this.cookieService.set('accessToken', accessToken);
+            // this.cookieService.set('refreshToken', refreshToken);
+            this.delete(item);
+          }
+        );
+      }
+    });
   }
 
   mapField(body) {

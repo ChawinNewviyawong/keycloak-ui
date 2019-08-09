@@ -46,6 +46,21 @@ export class DataService {
       );
   }
 
+  deleteProduct(product) {
+    const url = environment.dataURL + '/addProduct';
+    const headers = new HttpHeaders({
+      "Authorization": "Bearer " + this.cookieService.get('accessToken'),
+      "Content-Type": "application/json"
+    });
+    let body = {
+      productID: product.identity,
+    }
+    return this.httpClient.post<any>(url, body, {headers: headers, observe: 'response'})
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
