@@ -1,0 +1,72 @@
+h1 > span {
+    color: red;
+}
+.custom-modal-container {
+    padding: 15px;
+}
+.custom-modal-header {
+    background-color: #FFCC00;
+    color: #000000;
+    margin-top: -15px;
+}
+h1{
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.row.body {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 20px;
+}
+.form-control{
+  font-size: 20px;
+}
+.form-control.border-bottom {
+  resize: none;
+}
+.docImage{
+  text-align: center;
+}
+.divButton{
+  text-align: center;
+  padding-top: 30px;
+}
+.btn-primary {
+    background-color: #FFCC00;
+    border-radius: 50px;
+    border-width: 1px;
+    border-color: #000000;
+    font-size: 24px;
+    color: #000000;
+    font-weight: normal;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.btn-primary:hover {
+    background-color: #000000;
+    color: #FFCC00;
+}
+.message-body {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 20px;
+    color: #CCCCCC;
+    font-weight: lighter;
+    color: #000000;
+}
+.warning-message{
+    color: #DC143C;
+    font-size: 16px;
+    font-weight: normal;
+}
+#btnClose {
+  margin-right: 100px;
+    border-width: 1px;
+    background-color: #FFFFFF;
+    border-color: #000000;
+}
+#btnClose:hover {
+  color: #FFFFFF;
+  background-color: #000000;
+}

@@ -13,7 +13,7 @@ import { AuthService } from '../service/auth.service';
 })
 export class EditComponent implements OnInit {
 
-  product: any = {
+  product_payload: any = {
     identity: "",
     name: "",
     unit_price: "",
@@ -29,12 +29,16 @@ export class EditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.product = JSON.parse(localStorage.getItem('product'));
-    console.log(this.product)
+    this.product_payload = JSON.parse(localStorage.getItem('product'));
+    console.log(this.product_payload)
   }
 
   save(){
-    this.dataService.updateProduct(this.product).subscribe(
+    this.product_payload.identity = (this.product_payload.identity.trim()).toLowerCase()
+    this.product_payload.name = (this.product_payload.name.trim()).toLowerCase()
+    this.product_payload.currency =  (this.product_payload.currency.trim()).toLowerCase()
+
+    this.dataService.updateProduct(this.product_payload).subscribe(
       response => {
         console.log(response)
         this._router.navigateByUrl('/dashboard');
