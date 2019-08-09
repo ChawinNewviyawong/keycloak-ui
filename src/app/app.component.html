@@ -1,5 +1,5 @@
 <section style="background: #ffffff; ;">
-  <nav class="navbar navbar-expand-sm circle ">
+  <nav class="navbar navbar-expand-sm circle " style="margin-bottom: 20px" *ngIf="accessToken">
     <a class="navbar-brand" style="color: white ; ">web-port : {{port}} |</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -7,7 +7,7 @@
         <li class="nav-item active">
           <a class="nav-link" [routerLink]="['/dashboard']" style="color: white ; "> DashBoard
             <span class="sr-only">
-              (current)
+                4current)
             </span>
           </a>
         </li>
@@ -18,11 +18,25 @@
             </span>
           </a>
         </li>
+        <!-- <li class="nav-item active">
+          <button class="btn btn-linked" (click)="logout()" style="color: white ; "> log out
+            <span class="sr-only">
+              (current)
+            </span>
+          </button>
+        </li> -->
       </ul>
     </div>
 
-    <div input type="image" (click)="logout()" src="../assets/images/btn_logout.png">
-    </div>
+      <button class="btn btn-danger" (click)="logout()">
+        <span>
+          <img src="../assets/images/btn_logout.png" style="width:50px;height:30px;">
+        </span>
+        <div class="col-md-12">
+            Log out
+        </div>
+      </button>
+    <!-- <button class="btn btn-primary" type="button" (click)="logout()" src="../assets/images/btn_logout.png"></button> -->
 
   </nav>
 
