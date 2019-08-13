@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 const headers = new HttpHeaders({
   "Content-Type": "application/json",
@@ -13,10 +14,23 @@ const headers = new HttpHeaders({
 })
 export class ProfileService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private cookieService: CookieService) { }
 
   register(body) {
     const url = environment.profileURL + '/register';
+    return this.http.post<any>(url, body, { headers: headers, observe: 'response' })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  changePassword(password) {
+    const url = environment.profileURL + '/resetPassword';
+    let body = {
+      newPassword: password.newPassword,
+      accessToken: this.cookieService.get('accessToken'),
+    }
     return this.http.post<any>(url, body, { headers: headers, observe: 'response' })
       .pipe(
         catchError(this.handleError)

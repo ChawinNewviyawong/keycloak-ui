@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditComponent } from './edit/edit.component';
 import { AddComponent } from './add/add.component'
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'edit', component: EditComponent},
   { path: 'add', component: AddComponent},
+  { path: 'changepassword', component: ChangePasswordComponent},
 
 ];
 

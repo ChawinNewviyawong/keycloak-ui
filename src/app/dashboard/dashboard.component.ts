@@ -34,7 +34,17 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.checkToken();
     this.getProfile();
+  }
+
+  checkToken() {
+    if (this.cookieService.get('accessToken')) {
+      
+    }
+    else {
+      this._router.navigateByUrl('/login');
+    }
   }
 
   getProfile() {
@@ -99,6 +109,7 @@ export class DashboardComponent implements OnInit {
     console.log(item);
     this.dataService.deleteProduct(item).subscribe(response => {
       console.log(response);
+      this.getAllProductByOwner();
     }, error => {
       console.log(error);
       if (error.error.code == 401) {
@@ -118,6 +129,10 @@ export class DashboardComponent implements OnInit {
         );
       }
     });
+  }
+
+  changePassword() {
+    this._router.navigateByUrl('/changepassword');
   }
 
   mapField(body) {

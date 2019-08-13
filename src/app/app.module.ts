@@ -16,6 +16,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditComponent } from './edit/edit.component';
 import { AddComponent } from './add/add.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AddComponent } from './add/add.component';
     RegisterComponent,
     DashboardComponent,
     EditComponent,
-    AddComponent
+    AddComponent,
+    ChangePasswordComponent
   ],
   imports: [
     HttpClientModule,
