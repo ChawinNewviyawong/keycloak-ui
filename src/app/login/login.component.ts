@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
   }
 
   requestToken() {
+    this.user.username = this.user.username.trim().toLowerCase()
+    this.user.password = this.user.password.trim().toLowerCase()
+    
     console.log(this.user);
     this.authService.requestToken(this.user).subscribe(response => {
       console.log(response);
