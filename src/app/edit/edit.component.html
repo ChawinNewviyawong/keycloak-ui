@@ -1,3 +1,5 @@
+<ngx-loading [show]="loading" [config]="{ fullScreenBackdrop : true, primaryColour : '#FF6666', secondaryColour : '#FF6633', tertiaryColour : '#FF3333		'}"></ngx-loading>
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -11,7 +13,7 @@
                             </i>
                         </span>
                     </div>
-                    <input class="form-control" type="text" placeholder="Enter Product Name" [(ngModel)]="product.name"
+                    <input class="form-control" type="text" placeholder="Enter Product Name" [(ngModel)]="product_payload.name"
                         name="name" required>
                 </div>
                 <div class="input-group mb-3">
@@ -23,7 +25,7 @@
                         </span>
                     </div>
                     <input class="form-control" type="number" placeholder="Enter Price"
-                        [(ngModel)]="product.unit_price" name="price" required>
+                        [(ngModel)]="product_payload.unit_price" name="price" required>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -34,7 +36,7 @@
                         </span>
                     </div>
                     <input class="form-control" type="text" placeholder="Enter Currency"
-                        [(ngModel)]="product.currency" name="currency" required>
+                        [(ngModel)]="product_payload.currency" name="currency" required>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -44,7 +46,7 @@
                             </i>
                         </span>
                     </div>
-                    <input class="form-control" type="number" placeholder="Enter Quantity" [(ngModel)]="product.quantity"
+                    <input class="form-control" type="number" placeholder="Enter Quantity" [(ngModel)]="product_payload.quantity"
                         name="quantity" required>
                 </div>
                 <div class="row">

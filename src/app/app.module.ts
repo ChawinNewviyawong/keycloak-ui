@@ -16,6 +16,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditComponent } from './edit/edit.component';
 import { AddComponent } from './add/add.component';
+import { NgxLoadingModule ,ngxLoadingAnimationTypes} from 'ngx-loading';
 
 
 @NgModule({
@@ -31,9 +32,14 @@ import { AddComponent } from './add/add.component';
     HttpClientModule,
     FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.wanderingCubes,
+      backdropBorderRadius: '25px'
+    }),
   ],
   providers: [AuthService, ProfileService, CookieService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

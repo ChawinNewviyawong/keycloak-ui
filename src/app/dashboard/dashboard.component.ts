@@ -25,6 +25,8 @@ export class DashboardComponent implements OnInit {
   }
   port = location.port;
 
+  public loading = false;
+
   constructor(
     private cookieService: CookieService,
     private dataService: DataService,
@@ -34,6 +36,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.getProfile();
   }
 
@@ -63,6 +66,13 @@ export class DashboardComponent implements OnInit {
         console.log(error.error.code);
         // let refreshToken = localStorage.getItem('refreshToken');
         let refreshToken = this.cookieService.get('refreshToken');
+        console.log(`refreshToken : ${refreshToken}`)
+        if(error.error.message == "Token expire" ){
+    this.loading = false;
+
+                this._router.navigateByUrl("/login");
+
+        }
         this.authService.refreshToken(refreshToken).subscribe(
           response => {
             console.log(response);
@@ -74,6 +84,8 @@ export class DashboardComponent implements OnInit {
             this.getProfile();
           }
         );
+      }else{
+        this.loading = false;
       }
     });
   }
@@ -83,9 +95,15 @@ export class DashboardComponent implements OnInit {
     this.dataService.getAllProductByOwner(accessToken).subscribe((response) => {
       console.log(response);
       this.mapField(response.body);
+      this.loading = false;
     },
       error => {
-        console.log("Error Message:" + error);
+        this.loading = false;
+          // (<HTMLInputElement>document.getElementById('status')).value = this.result.message;
+          // console.log('Error:' + this.result.message);
+          document.getElementById("display").style.display = "block";
+
+        console.log("Show Message:" + error);
       })
   }
 
@@ -139,3 +157,5 @@ export class DashboardComponent implements OnInit {
   }
 
 }
+
+//

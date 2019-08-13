@@ -42,12 +42,13 @@ export class RegisterComponent implements OnInit {
       .subscribe((response) => {
         // if (response.status == 200) {
           console.log(`[result] : ${JSON.stringify(response.body) }`);
-          // this._router.navigateByUrl("/dashboard");
+          this._router.navigateByUrl("/login");
         // }
         // else {
         //   console.log("Error Message:" + response.statusText);
         // }
       }, error => {
+
         console.log("Error Message:" + error);
       });
   }

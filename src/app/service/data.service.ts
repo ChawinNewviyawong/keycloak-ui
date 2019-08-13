@@ -47,7 +47,7 @@ export class DataService {
   }
 
   deleteProduct(product) {
-    const url = environment.dataURL + '/addProduct';
+    const url = environment.dataURL + '/deleteProduct';
     const headers = new HttpHeaders({
       "Authorization": "Bearer " + this.cookieService.get('accessToken'),
       "Content-Type": "application/json"

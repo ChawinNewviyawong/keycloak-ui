@@ -31,6 +31,9 @@ export class AddComponent implements OnInit {
   result: any = {
     message: ""
   }
+
+    public loading = false;
+
   constructor(
     private cookieService: CookieService,
     private dataService: DataService,
@@ -43,6 +46,8 @@ export class AddComponent implements OnInit {
 
 
   addProduct() {
+    this.loading = true;
+
     let accessToken = localStorage.getItem('accessToken');
     console.log(`[accessToken] : ${accessToken}`);
     console.log(`[addProduct] : ${JSON.stringify(this.product_payload)}`);
@@ -61,6 +66,7 @@ export class AddComponent implements OnInit {
       // this.mapField(response.body);
       // $('#resultModal').modal('show')
       document.getElementById("error").style.display = "none";
+          this.loading = false;
 
       this._router.navigateByUrl("/dashboard");
     },
@@ -100,8 +106,8 @@ export class AddComponent implements OnInit {
           document.getElementById("error").style.display = "block";
 
         }
-
-        
+        this.loading = false;
+      
     
 
         // $('#resultModal').modal('show')
