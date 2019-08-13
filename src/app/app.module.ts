@@ -16,11 +16,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditComponent } from './edit/edit.component';
 import { AddComponent } from './add/add.component';
-<<<<<<< HEAD
 import { ChangePasswordComponent } from './change-password/change-password.component';
-=======
 import { NgxLoadingModule ,ngxLoadingAnimationTypes} from 'ngx-loading';
->>>>>>> 986b53ba9cda79739f0e2cd00194cc391464ed5e
 
 
 @NgModule({

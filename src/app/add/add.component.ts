@@ -32,7 +32,7 @@ export class AddComponent implements OnInit {
     message: ""
   }
 
-    public loading = false;
+  public loading = false;
 
   constructor(
     private cookieService: CookieService,
@@ -46,71 +46,87 @@ export class AddComponent implements OnInit {
 
 
   addProduct() {
-    this.loading = true;
+    console.log(this.product_payload)
+    if (this.product_payload.identity &&
+      this.product_payload.name &&
+      this.product_payload.unit_price &&
+      this.product_payload.currency &&
+      this.product_payload.quantity) {
 
-    let accessToken = localStorage.getItem('accessToken');
-    console.log(`[accessToken] : ${accessToken}`);
-    console.log(`[addProduct] : ${JSON.stringify(this.product_payload)}`);
+      this.loading = true;
 
-    this.product_payload.identity = (this.product_payload.identity.trim()).toLowerCase()
-    this.product_payload.name = (this.product_payload.name.trim()).toLowerCase()
-    this.product_payload.currency =  (this.product_payload.currency.trim()).toLowerCase()
+      let accessToken = localStorage.getItem('accessToken');
+      console.log(`[accessToken] : ${accessToken}`);
+      console.log(`[addProduct] : ${JSON.stringify(this.product_payload)}`);
 
-    this.dataService.addProduct(this.product_payload, accessToken).subscribe((response) => {
-      console.log(response);
-      // this.progressDialog.close();
+      this.product_payload.identity = (this.product_payload.identity.trim()).toLowerCase()
+      this.product_payload.name = (this.product_payload.name.trim()).toLowerCase()
+      this.product_payload.currency = (this.product_payload.currency.trim()).toLowerCase()
 
-      // let message = "OK"
-      // let header = "ABCD"
-      // this.modal.open(ModalAlert, overlayConfigFactory({ header, message }, BSModalContext));
-      // this.mapField(response.body);
-      // $('#resultModal').modal('show')
-      document.getElementById("error").style.display = "none";
-          this.loading = false;
-
-      this._router.navigateByUrl("/dashboard");
-    },
-      error => {
-        this.result.message = "[Error] :" + JSON.stringify(error)
-        console.log(this.result.message);
+      this.dataService.addProduct(this.product_payload, accessToken).subscribe((response) => {
+        console.log(response);
+        // this.progressDialog.close();
 
         // let message = "OK"
         // let header = "ABCD"
         // this.modal.open(ModalAlert, overlayConfigFactory({ header, message }, BSModalContext));
-
-        if (error.status == 401) {
-          console.log(`status code : ${error.status}`);
-          // let refreshToken = localStorage.getItem('refreshToken');
-          let refreshToken = this.cookieService.get('refreshToken');
-          console.log(`refreshToken : ${refreshToken}`);
-
-          this.authService.refreshToken(refreshToken).subscribe(
-            response => {
-              console.log(response);
-              let accessToken = response.body.accessToken;
-              let refreshToken = response.body.refreshToken;
-              localStorage.setItem('accessToken', accessToken);
-              localStorage.setItem('refreshToken', refreshToken);
-              this.cookieService.set('accessToken', accessToken);
-              this.cookieService.set('refreshToken', refreshToken);
-              this.addProduct();
-              document.getElementById("error").style.display = "none";
-
-            }
-          );
-        }else{
-
-          // let message = this.result.message;
-          (<HTMLInputElement>document.getElementById('status')).value = this.result.message;
-          console.log('Error:' + this.result.message);
-          document.getElementById("error").style.display = "block";
-
-        }
-        this.loading = false;
-      
-    
-
+        // this.mapField(response.body);
         // $('#resultModal').modal('show')
-      })
+        document.getElementById("error").style.display = "none";
+        this.loading = false;
+
+        this._router.navigateByUrl("/dashboard");
+      },
+        error => {
+          this.result.message = "[Error] :" + JSON.stringify(error)
+          console.log(this.result.message);
+
+          // let message = "OK"
+          // let header = "ABCD"
+          // this.modal.open(ModalAlert, overlayConfigFactory({ header, message }, BSModalContext));
+
+          if (error.status == 401) {
+            console.log(`status code : ${error.status}`);
+            // let refreshToken = localStorage.getItem('refreshToken');
+            let refreshToken = this.cookieService.get('refreshToken');
+            console.log(`refreshToken : ${refreshToken}`);
+
+            this.authService.refreshToken(refreshToken).subscribe(
+              response => {
+                console.log(response);
+                let accessToken = response.body.accessToken;
+                let refreshToken = response.body.refreshToken;
+                localStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('refreshToken', refreshToken);
+                this.cookieService.set('accessToken', accessToken);
+                this.cookieService.set('refreshToken', refreshToken);
+                this.addProduct();
+                document.getElementById("error").style.display = "none";
+
+              }
+            );
+          } else {
+
+            // let message = this.result.message;
+            (<HTMLInputElement>document.getElementById('status')).value = this.result.message;
+            console.log('Error:' + this.result.message);
+            document.getElementById("error").style.display = "block";
+
+          }
+          this.loading = false;
+
+
+
+          // $('#resultModal').modal('show')
+
+        })
+    }
+    else {
+      (<HTMLInputElement>document.getElementById('status')).value = 'invalid input data';
+            console.log('Error: invalid input data');
+            document.getElementById("error").style.display = "block";
+    }
+
+
   }
 }

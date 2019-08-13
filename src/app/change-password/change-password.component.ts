@@ -12,6 +12,7 @@ export class ChangePasswordComponent implements OnInit {
   password='';
   confirmpassword=''
   error=''
+  public loading = false;
 
   constructor(
     private profileService: ProfileService,
@@ -21,7 +22,10 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePassword() {
+
     if (this.password === this.confirmpassword) {
+      this.loading = true;
+
       let body = {
         newPassword: this.password,
       }
@@ -33,6 +37,8 @@ export class ChangePasswordComponent implements OnInit {
           else {
             this.error = response.statusText;
           }
+          this.loading = false;
+
         }
       )
     }

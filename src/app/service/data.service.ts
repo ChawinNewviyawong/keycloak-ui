@@ -53,7 +53,7 @@ export class DataService {
       "Content-Type": "application/json"
     });
     let body = {
-      productID: product.identity,
+      identity: product.identity,
     }
     return this.httpClient.post<any>(url, body, {headers: headers, observe: 'response'})
       .pipe(
