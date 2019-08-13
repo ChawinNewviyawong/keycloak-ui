@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppComponent implements OnInit {
   title = 'keycloak-ui';
   port = location.port;
-  
+
   constructor(
     private cookieService: CookieService,
     private _router: Router
@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
     this.accessToken = this.cookieService.get('accessToken');
     this.prepareUserData();
     this._router.events
-        .subscribe((event) => {
-          this.prepareUserData();
-        });
+      .subscribe((event) => {
+        this.prepareUserData();
+      });
   }
 
   prepareUserData() {
